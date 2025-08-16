@@ -42,11 +42,12 @@ const Signin: React.FC<SigninProps> = ({ session, setSession, firstTimeLogin, se
           setSuccess(true);
           // If firstTimeCall is true, redirect to profile completion
           if (firstTimeLogin) {
-            console.log('call from login before push--firstTimeLogin='+firstTimeLogin);
+            //console.log('call from login before push--firstTimeLogin='+firstTimeLogin);
             setFirstTimeLogin(false); // reset after first login
             history.push('/complete-profile');
           } else {
-            history.push('/about');
+            //console.log('call from login before push--firstTimeLogin='+firstTimeLogin);
+            history.push('/dashboard');
           }
         }
       }
@@ -58,7 +59,7 @@ const Signin: React.FC<SigninProps> = ({ session, setSession, firstTimeLogin, se
             <IonButtons slot="start">
               <IonMenuButton />
             </IonButtons>
-            <Logos title="Sing in"/>
+            <Logos title="Sign in"/>
           </IonToolbar>
         </IonHeader>
         <IonContent>

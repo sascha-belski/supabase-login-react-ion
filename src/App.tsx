@@ -14,8 +14,9 @@ import Signup from './pages/Signup';
 import Logout from './pages/Logout';
 
 import About from './pages/About';
-// import CompleteProfile from './pages/CompleteProfile';
-// import AuthCallback from './pages/AuthCallback';
+import Dashboard from './pages/Dashboard';
+import CompleteProfile from './pages/CompleteProfile';
+import AuthCallback from './pages/AuthCallback';
 
 import { supabase } from './supabaseClient';
 
@@ -96,9 +97,9 @@ const App: React.FC = () => {
             <Signup />
           </Route>
 
-            {/* <Route exact path="/auth/callback">
+          <Route exact path="/auth/callback">
             <AuthCallback setFirstTimeLogin={setFirstTimeLogin} />
-          </Route> */}
+          </Route>
 
           <Route exact path="/logout">
             <Logout session={session} setSession={setSession} />
@@ -108,9 +109,13 @@ const App: React.FC = () => {
             <About session={session} />
           </Route>
 
-          {/* <Route exact path="/complete-profile">
-            {session ? <CompleteProfile session={session} /> : <Redirect to="/signin" />}
-          </Route> */}
+          <Route exact path="/dashboard">
+            <Dashboard session={session} profile={profile} />
+          </Route>
+
+          <Route exact path="/complete-profile">
+            <CompleteProfile session={session} />
+          </Route>
 
           <Route exact path="/">
             {session ? <Redirect to="/about" /> : <Redirect to="/signin" />}

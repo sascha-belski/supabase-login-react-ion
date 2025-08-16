@@ -55,7 +55,7 @@ const Signup: React.FC = () => {
       return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
+    const { data: { user } = {}, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -63,15 +63,40 @@ const Signup: React.FC = () => {
         //emailRedirectTo: `${window.location.origin}/signin` // optional: redirect after confirmation
       }
     });
-    if (error) {
+    if (signUpError) {
       //setError(error.message)
-      setErrorMessage(<>{error.message}</>);
+      setErrorMessage(<>{signUpError.message}</>);
     } else  {
-      setMessage("Sign-up successful! Check your email to confirm your account.");
+      // lets try to insert record into public.profiles -- trigger not functioning on supabase
+        if ( user && user.id) {
+        // Check if profile exists
+        const { data: existingProfiles, error: profileCheckError } = await supabase
+          .from('profiles')
+          .select('id')
+          .eq('id', user.id);
+
+        if (profileCheckError) {
+          setErrorMessage(<>{profileCheckError.message}</>);
+        } else if (!existingProfiles?.length) {
+          // Insert profile
+          const { error: profileInsertError } = await supabase
+            .from('profiles')
+            .insert([
+              {
+                id: user.id,
+                email: user.email,
+                full_name: user.user_metadata?.full_name || ""
+                //created_at: new Date().toISOString()
+              }
+            ]);
+
+          if (profileInsertError) setErrorMessage(<>{profileInsertError.message}</>);
+          else setMessage("Sign-up successful! Check your email to confirm your account.");
+        }
+      }
     }
 
     setLoading(false);
-    console.log(data);
   }
   return (
     <IonPage>
