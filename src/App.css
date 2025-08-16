@@ -1,13 +1,4 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
 .logo {
-  height: 6em;
-  padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -39,4 +30,28 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.app-device-frame {
+  max-width: 414px; /* iPhone 13 Pro max width */
+  height: 896px;    /* iPhone 13 Pro max height */
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  overflow: hidden;
+  background: rgb(206, 206, 206);
+}
+
+.popoverText {
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 10;
 }
