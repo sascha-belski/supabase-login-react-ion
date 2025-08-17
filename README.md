@@ -10,7 +10,7 @@ It provides a **login and profile management interface** for frontend projects u
 ## 🔗 Live Demo
 
 Check out the live version of this project here:
-👉 **[https://your-username.github.io/supabase-login-react-ion](https://your-username.github.io/supabase-login-react-ion)**
+👉 **[https://sascha-belski.github.io/supabase-login-react-ion](https://sascha-belski.github.io/supabase-login-react-ion)**
 
 ---
 
@@ -76,6 +76,6 @@ Visit: http://localhost:5173
 This frontend tool helps you integrate Supabase authentication into any React/Ionic project quickly.
 You can manage users, edit profiles, and test authentication flows easily.
 
-## 📄 Licens
+## 📄 License
 
 MIT
