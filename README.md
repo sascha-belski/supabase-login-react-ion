@@ -10,7 +10,7 @@ It provides a **login and profile management interface** for frontend projects u
 ## 🔗 Live Demo
 
 Check out the live version of this project here:
-👉 **[https://your-username.github.io/your-repo](https://your-username.github.io/your-repo)**
+👉 **[https://your-username.github.io/supabase-login-react-ion](https://your-username.github.io/supabase-login-react-ion)**
 
 ---
 
@@ -37,8 +37,8 @@ Check out the live version of this project here:
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/sascha-belski/supabase-login-react-ion/
-cd your-repo
+git clone https://github.com/sascha-belski/supabase-login-react-ion.git
+cd supabase-login-react-ion
 ```
 2. **Install dependencies**
 
