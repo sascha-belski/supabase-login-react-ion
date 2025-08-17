@@ -37,7 +37,7 @@ Check out the live version of this project here:
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/sascha-belski/supabase-login-react-ion/
 cd your-repo
 ```
 2. **Install dependencies**
