@@ -39,3 +39,34 @@ Check out the live version of this project here:
 ```bash
 git clone https://github.com/your-username/your-repo.git
 cd your-repo
+
+2. **Install dependencies**
+
+```bash
+npm install
+
+3. **Configure Supabase**
+
+- Create a project in Supabase.
+
+- your API URL and anon/public key.
+
+- Create a .env file in the root of your project and add:
+
+```bash
+VITE_SUPABASE_URL=your-supabase-url
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+
+4. **Run the project**
+
+```bash
+npm run dev
+
+5. **Open in browser**
+
+Visit: http://localhost:5173
+
+## 📄 About
+
+This frontend tool helps you integrate Supabase authentication into any React/Ionic project quickly.
+You can manage users, edit profiles, and test authentication flows easily.
