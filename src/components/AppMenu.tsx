@@ -34,13 +34,18 @@ const AppMenu: React.FC<AppMenuProps> = ({ session }) => {
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
-                <IonItem routerLink="/about" routerDirection="none" detail={false}>
-                  <IonLabel>About</IonLabel>
+                <IonItem routerLink="/dashboard" routerDirection="none" detail={false}>
+                  <IonLabel>Dashboard</IonLabel>
                 </IonItem>
               </IonMenuToggle>
               <IonMenuToggle>
-                <IonItem routerLink="/dashboard" routerDirection="none" detail={false}>
-                  <IonLabel>Dashboard</IonLabel>
+                <IonItem routerLink="/complete-profile" routerDirection="none" detail={false}>
+                  <IonLabel>My Profile</IonLabel>
+                </IonItem>
+              </IonMenuToggle>
+              <IonMenuToggle>
+                <IonItem routerLink="/about" routerDirection="none" detail={false}>
+                  <IonLabel>About</IonLabel>
                 </IonItem>
               </IonMenuToggle>
             </>

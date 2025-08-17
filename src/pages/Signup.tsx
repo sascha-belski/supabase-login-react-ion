@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import type { JSX } from 'react';
 import { IonPage, IonButtons, IonMenuButton, IonHeader, IonToolbar, IonContent, IonInput, IonButton, IonText, IonRouterLink  } from '@ionic/react';
-import { IonCard, IonCardContent } from '@ionic/react';
+import { IonCard, IonCardContent, IonSpinner } from '@ionic/react';
 
 import Logos from '../components/Logos';
 
@@ -84,9 +84,9 @@ const Signup: React.FC = () => {
             .insert([
               {
                 id: user.id,
-                email: user.email,
-                full_name: user.user_metadata?.full_name || ""
-                //created_at: new Date().toISOString()
+                email: user.email
+                // first_name: user.user_metadata?.first_name || ""
+                // created_at: new Date().toISOString()
               }
             ]);
 
@@ -130,7 +130,7 @@ const Signup: React.FC = () => {
             {errorMessage  && <IonText color="danger">{errorMessage }</IonText>}
             {message && <IonText color="success">{message}</IonText>}
             <IonButton expand="full" onClick={handleSignUp} disabled={loading}>
-              {loading ? 'Signing up...' : errorMessage  ? 'Signing up failed' : email ? 'Signed up' : 'Sign up'}
+              {loading ? <IonSpinner name="dots"></IonSpinner> : errorMessage  ? 'Signing up failed' : email ? 'Signed up' : 'Sign up'}
             </IonButton>
           </IonCardContent>
         </IonCard>

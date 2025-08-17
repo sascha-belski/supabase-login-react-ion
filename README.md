@@ -1,69 +1,41 @@
-# React + TypeScript + Vite
+# 🔑 Supabase Auth Tool
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a demonstration project built using **React**, **TypeScript**, **Vite**, and **Ionic Framework**.
+It provides a **login and profile management interface** for frontend projects using **Supabase** for authentication and database storage.
 
-Currently, two official plugins are available:
+> **Note:** This app uses [Supabase](https://supabase.com/) for **educational and demonstrational purposes only**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🔗 Live Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Check out the live version of this project here:
+👉 **[https://your-username.github.io/your-repo](https://your-username.github.io/your-repo)**
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## ✨ Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- 🔑 Signup and Login using Supabase Auth
+- 🧑‍💻 Update Profile Info: first name, last name, avatar, birthday, tech stack, languages, hobbies
+- 🔄 Real-time session handling
+- 📱 Mobile-friendly UI using Ionic components
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠 Technologies Used
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **React** with **TypeScript**
+- **Vite** for fast development environment
+- **Ionic React** for native-like mobile UI
+- **Supabase** – backend-as-a-service for authentication and database
+
+---
+
+## ⚡ Getting Started
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/your-username/your-repo.git
+cd your-repo

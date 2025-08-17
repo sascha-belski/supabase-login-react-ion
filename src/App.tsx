@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { Session } from '@supabase/supabase-js';
 import { IonApp } from '@ionic/react';
-import { IonRouterOutlet } from '@ionic/react';
+import { IonRouterOutlet, IonSpinner } from '@ionic/react';
 import { Route, Redirect } from 'react-router-dom';
 //import { useHistory } from 'react-router-dom';
 
@@ -22,8 +22,13 @@ import { supabase } from './supabaseClient';
 
 type Profile = {
   id: string | null;
-  full_name?: string | null;
+  first_name?: string | null;
+  last_name?: string | null;
+  birthday?: string | null;
   avatar_url?: string | null;
+  tech_stack?: string | null;
+  languages?: string | null;
+  hobbies?: string | null;
 };
 
 const App: React.FC = () => {
@@ -36,7 +41,21 @@ const App: React.FC = () => {
   //const history = useHistory();
   //console.log(!!session);
 
-  console.log((profile)?.full_name);
+  //console.log((profile)?.full_name);
+
+  const fetchProfile = async (session: Session | null) => {
+    //setSession(session);
+    if (session?.user) {
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', session.user.id)
+        .single();
+      setProfile(profileData || null);
+    } else {
+      setProfile(null);
+    }
+  };
 
   useEffect(() => {
 
@@ -51,14 +70,7 @@ const App: React.FC = () => {
       //console.log('from App session='+session);
 
       if (session?.user) {
-        const { data: profileData, error } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-
-        if (!error) setProfile(profileData);
-        else setProfile(null);
+        await fetchProfile(session)
       } else {
         setProfile(null);
       }
@@ -69,6 +81,8 @@ const App: React.FC = () => {
     // Subscribe to auth changes
     const {data: { subscription }} = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      fetchProfile(session);
+      console.log('in subscription profile fetsched');
     });
 
     // Cleanup subscription on unmount
@@ -78,7 +92,7 @@ const App: React.FC = () => {
   }, []);
 
   if (loading) {
-      return <div>Loading...</div>;  // or a spinner component
+      return <div><IonSpinner name="dots"></IonSpinner></div>;  // or a spinner component
     }
   return (
     <>
@@ -114,7 +128,7 @@ const App: React.FC = () => {
           </Route>
 
           <Route exact path="/complete-profile">
-            <CompleteProfile session={session} />
+            <CompleteProfile session={session} setProfile={setProfile} />
           </Route>
 
           <Route exact path="/">
