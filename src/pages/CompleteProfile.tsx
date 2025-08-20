@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import { useHistory } from 'react-router-dom';
 import {IonPage, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput,
@@ -23,20 +23,43 @@ type Profile = {
 
 interface AboutProps {
   session: Session | null;
-  // profile: Profile | null;
+  profile: Profile | null;
   setProfile: (profile: Profile | null) => void;
 }
 
-const CompleteProfile: React.FC<AboutProps> = ({ session, setProfile }) => {
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
-  const [birthday, setBirthday] = useState<string | null>(null);
-  const [techStack, setTechStack] = useState('');
-  const [languages, setLanguages] = useState('');
-  const [hobbies, setHobbies] = useState('');
-  const [photoUrl, setPhotoUrl] = useState('');
+const CompleteProfile: React.FC<AboutProps> = ({ session, profile, setProfile }) => {
+  const [fname, setFname] = useState(profile?.first_name || '');
+  const [lname, setLname] = useState(profile?.last_name || '');
+  const [birthday, setBirthday] = useState<string | null>(profile?.birthday || null);
+  const [techStack, setTechStack] = useState(profile?.tech_stack || '');
+  const [languages, setLanguages] = useState(profile?.languages || '');
+  const [hobbies, setHobbies] = useState(profile?.hobbies || '');
+  const [photoUrl, setPhotoUrl] = useState(profile?.avatar_url || '');
   const [error, setError] = useState<string | null>(null);
+
   const history = useHistory();
+
+  // Optional: update state if `profile` changes after initial load
+  useEffect(() => {
+    if (profile) {
+      setFname(profile.first_name || '');
+      setLname(profile.last_name || '');
+      setBirthday(profile.birthday || null);
+      setTechStack(profile.tech_stack || '');
+      setLanguages(profile.languages || '');
+      setHobbies(profile.hobbies || '');
+      setPhotoUrl(profile.avatar_url || '');
+    } else {
+      // Clear the form when profile is null (e.g., after logout)
+      setFname('');
+      setLname('');
+      setBirthday(null);
+      setTechStack('');
+      setLanguages('');
+      setHobbies('');
+      setPhotoUrl('');
+    }
+  }, [profile]);
 
   // console.log('call from completeprofile session='+session);
   const handleSave = async () => {

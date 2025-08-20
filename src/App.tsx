@@ -128,7 +128,7 @@ const App: React.FC = () => {
           </Route>
 
           <Route exact path="/complete-profile">
-            <CompleteProfile session={session} setProfile={setProfile} />
+            <CompleteProfile session={session} profile={profile} setProfile={setProfile} />
           </Route>
 
           <Route exact path="/">

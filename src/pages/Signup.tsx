@@ -31,19 +31,24 @@ const Signup: React.FC = () => {
         : `${window.location.origin}/#/auth/callback`;
 
     // check if entry exists already
-    const { data: existingUsers, error: fetchError } = await supabase
-      .from('auth_users_view')
-      .select('*')
-      .eq('email', email);
+    // const { data: existingUsers, error: fetchError } = await supabase
+      // .from('auth_users_view')
+      // .select('*')
+      // .eq('email', email);
+    const { data: existingUsers, error: fetchError } = await supabase.rpc('check_email_exists', {
+      p_email: email
+    });
+
 
     if (fetchError) {
-      //setError(fetchError.message);
       setErrorMessage(<>{fetchError.message}</>);
       setLoading(false);
       return;
     }
-
-    if (existingUsers && existingUsers.length > 0) {
+    console.log(email);
+  console.log(existingUsers);
+  console.log(existingUsers.length);
+    if (existingUsers) {
       // setError('This email is already registered. Please sign in instead.');
       setErrorMessage(
         <>
@@ -53,31 +58,22 @@ const Signup: React.FC = () => {
       );
       setLoading(false);
       return;
-    }
+    }  else  {
 
-    const { data: { user } = {}, error: signUpError } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-      emailRedirectTo: redirectTo // optional: redirect after confirmation
-        //emailRedirectTo: `${window.location.origin}/signin` // optional: redirect after confirmation
-      }
-    });
-    if (signUpError) {
-      //setError(error.message)
-      setErrorMessage(<>{signUpError.message}</>);
-    } else  {
-      // lets try to insert record into public.profiles -- trigger not functioning on supabase
-        if ( user && user.id) {
-        // Check if profile exists
-        const { data: existingProfiles, error: profileCheckError } = await supabase
-          .from('profiles')
-          .select('id')
-          .eq('id', user.id);
-
-        if (profileCheckError) {
-          setErrorMessage(<>{profileCheckError.message}</>);
-        } else if (!existingProfiles?.length) {
+      const { data: { user } = {}, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+        emailRedirectTo: redirectTo // optional: redirect after confirmation
+          //emailRedirectTo: `${window.location.origin}/signin` // optional: redirect after confirmation
+        }
+      });
+      if (signUpError) {
+        //setError(error.message)
+        setErrorMessage(<>{signUpError.message}</>);
+      } else  {
+        // lets try to insert record into public.profiles -- trigger not functioning on supabase
+        if ( user && user.email) {
           // Insert profile
           const { error: profileInsertError } = await supabase
             .from('profiles')
@@ -89,7 +85,6 @@ const Signup: React.FC = () => {
                 // created_at: new Date().toISOString()
               }
             ]);
-
           if (profileInsertError) setErrorMessage(<>{profileInsertError.message}</>);
           else setMessage("Sign-up successful! Check your email to confirm your account.");
         }
